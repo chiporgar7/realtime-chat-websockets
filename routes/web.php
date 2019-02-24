@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\websocketdemo;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,20 @@
 */
 
 Route::get('/', function () {
+
+	broadcast(new websocketdemo('Algo de información'));
+
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/chats','ChatsController@index');
+
+Route::get('/messages','ChatsController@fetchMessages');
+
+Route::post('/messages','ChatsController@sendMessages');
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
